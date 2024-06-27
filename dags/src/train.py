@@ -4,6 +4,8 @@ from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 import joblib
+import glob
+import os
 
 def compute_regression_metrics(y_true, y_pred):
     return {
@@ -15,19 +17,34 @@ def compute_regression_metrics(y_true, y_pred):
 def save_model(model, file_path):
     joblib.dump(model, file_path)
 
-def train_model():
-    data = pd.read_csv("data/weather_data.csv").dropna()
-    target = ["temperature"]  # Change to your target variable
-    features = ["humidity", "pressure", "wind_speed", "temperature"]  # Include new feature
+def load_latest_data(data_dir):
+    list_of_files = glob.glob(os.path.join(data_dir, 'weather_data_*.csv'))
+    latest_file = max(list_of_files, key=os.path.getctime)
+    return pd.read_csv(latest_file)
 
-    x = data[features]
+def train_model():
+    data_dir = "data"
+    data = load_latest_data(data_dir).dropna()
+
+    # Define target and features based on the latest API response
+    target = "temperature_2m"
+    features = [
+        "relative_humidity_2m", "dew_point_2m", "apparent_temperature",
+        "precipitation", "rain", "snowfall", "weather_code", "surface_pressure", "wind_speed_10m"
+    ]
+
+    X = data[features]
     y = data[target]
-    x_train, x_validation, y_train, y_validation = train_test_split(x, y, test_size=0.3)
+    X_train, X_validation, y_train, y_validation = train_test_split(X, y, test_size=0.3, random_state=42)
+
     model = LinearRegression()
-    model.fit(x_train, y_train)
-    y_pred = model.predict(x_validation)
+    model.fit(X_train, y_train)
+    y_pred = model.predict(X_validation)
     metrics = compute_regression_metrics(y_validation, y_pred)
     print(metrics)
+
     save_model(model, 'weather_model.pkl')
 
-
+def retrain_model():
+    # This function can be expanded if additional logic is needed during retraining
+    train_model()

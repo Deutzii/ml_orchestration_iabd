@@ -1,18 +1,18 @@
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 from airflow.utils.dates import days_ago
-from datetime import timedelta
+from datetime import datetime, timedelta
 import os
 import sys
 import requests
 import pandas as pd
 
-# Ajoutez le chemin au système de chemins d'importation
+# Add the path to the system's import paths
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src'))
 
-from src.train import train_model  # Assurez-vous que le module train_model existe et est correctement importé
+from train import retrain_model  # Ensure that the train module exists and is correctly imported
 
-# Arguments par défaut pour le DAG
+# Default arguments for the DAG
 default_args = {
     'owner': 'airflow',
     'depends_on_past': False,
@@ -20,10 +20,10 @@ default_args = {
     'email_on_failure': False,
     'email_on_retry': False,
     'retries': 1,
-    'retry_delay': timedelta(minutes=5),
+    'retry_delay': timedelta(seconds=45),
 }
 
-# Définir le DAG
+# Define the DAG
 dag = DAG(
     'weather_pipeline',
     default_args=default_args,
@@ -33,26 +33,36 @@ dag = DAG(
 )
 
 def fetch_weather_data():
-    url = 'https://api.open-meteo.com/v1/meteofrance?latitude=52.52&longitude=13.41&hourly=temperature_2m'
+    print("Fetching weather data from Open Meteo API...")
+    latitude = 52.52
+    longitude = 13.41
+    url = f'https://api.open-meteo.com/v1/meteofrance?latitude={latitude}&longitude={longitude}&hourly'\
+    '=temperature_2m,relative_humidity_2m,dew_point_2m,apparent_temperature,precipitation,rain,snowfall,'\
+    'weather_code,surface_pressure,wind_speed_10m&past_days=7'
     response = requests.get(url)
     if response.status_code != 200:
+        print(f"Error fetching data: {response.status_code}")
         raise Exception("Error fetching data from Open Meteo API")
     data = response.json()
     hourly_data = data['hourly']
-    temperature_data = hourly_data['temperature_2m']
-    
-    df = pd.DataFrame({
-        'time': hourly_data['time'],
-        'temperature_2m': temperature_data,
-    })
-    
-    os.makedirs('/opt/airflow/data', exist_ok=True)
-    df.to_csv('/opt/airflow/data/weather_data.csv', index=False)
 
-def train_model_task():
-    train_model()
+    print("Fetched data successfully, preparing DataFrame...")
 
-# Tâches
+    df = pd.DataFrame(hourly_data)
+    
+    current_date = datetime.now().strftime("%Y%m%d")
+    output_dir = './data'
+    os.makedirs(output_dir, exist_ok=True)
+    output_file = os.path.join(output_dir, f'weather_data_{current_date}.csv')
+    df.to_csv(output_file, index=False)
+    print(f"Data saved to {output_file}")
+
+def retrain_model_task():
+    print("Retraining model with new data...")
+    retrain_model()
+    print("Model retraining completed.")
+
+# Tasks
 download_task = PythonOperator(
     task_id='download_weather_data',
     python_callable=fetch_weather_data,
@@ -60,10 +70,10 @@ download_task = PythonOperator(
 )
 
 train_task = PythonOperator(
-    task_id='train_model',
-    python_callable=train_model_task,
+    task_id='retrain_model',
+    python_callable=retrain_model_task,
     dag=dag,
 )
 
-# Dépendances des tâches
+# Task dependencies
 download_task >> train_task
