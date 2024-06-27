@@ -3561,3 +3561,153 @@ Traceback (most recent call last):
 ModuleNotFoundError: No module named 'sklearn'
 [2024-06-27T10:36:26.901+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/weather_pipeline.py
 [2024-06-27T10:36:26.948+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/weather_pipeline.py took 1.066 seconds
+[2024-06-27T14:52:47.441+0000] {processor.py:161} INFO - Started process (PID=48) to work on /opt/airflow/dags/weather_pipeline.py
+[2024-06-27T14:52:47.455+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/weather_pipeline.py for tasks to queue
+[2024-06-27T14:52:47.501+0000] {logging_mixin.py:188} INFO - [2024-06-27T14:52:47.490+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/weather_pipeline.py
+[2024-06-27T14:53:08.257+0000] {logging_mixin.py:188} INFO - [2024-06-27T14:53:08.241+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/weather_pipeline.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/weather_pipeline.py", line 23, in <module>
+    'retry_delay': timedelta(secondes=40),
+                   ^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'secondes' is an invalid keyword argument for __new__()
+[2024-06-27T14:53:08.261+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/weather_pipeline.py
+[2024-06-27T14:53:08.391+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/weather_pipeline.py took 21.034 seconds
+[2024-06-27T14:53:59.558+0000] {processor.py:161} INFO - Started process (PID=128) to work on /opt/airflow/dags/weather_pipeline.py
+[2024-06-27T14:53:59.562+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/weather_pipeline.py for tasks to queue
+[2024-06-27T14:53:59.580+0000] {logging_mixin.py:188} INFO - [2024-06-27T14:53:59.579+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/weather_pipeline.py
+[2024-06-27T14:54:08.556+0000] {logging_mixin.py:188} INFO - [2024-06-27T14:54:08.545+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/weather_pipeline.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/weather_pipeline.py", line 23, in <module>
+    'retry_delay': timedelta(secondes=40),
+                   ^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'secondes' is an invalid keyword argument for __new__()
+[2024-06-27T14:54:08.559+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/weather_pipeline.py
+[2024-06-27T14:54:08.767+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/weather_pipeline.py took 9.264 seconds
+[2024-06-27T14:54:39.467+0000] {processor.py:161} INFO - Started process (PID=201) to work on /opt/airflow/dags/weather_pipeline.py
+[2024-06-27T14:54:39.473+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/weather_pipeline.py for tasks to queue
+[2024-06-27T14:54:39.481+0000] {logging_mixin.py:188} INFO - [2024-06-27T14:54:39.479+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/weather_pipeline.py
+[2024-06-27T14:54:47.730+0000] {logging_mixin.py:188} INFO - [2024-06-27T14:54:47.723+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/weather_pipeline.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/weather_pipeline.py", line 23, in <module>
+    'retry_delay': timedelta(secondes=40),
+                   ^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'secondes' is an invalid keyword argument for __new__()
+[2024-06-27T14:54:47.739+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/weather_pipeline.py
+[2024-06-27T14:54:47.824+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/weather_pipeline.py took 8.401 seconds
+[2024-06-27T14:55:18.116+0000] {processor.py:161} INFO - Started process (PID=277) to work on /opt/airflow/dags/weather_pipeline.py
+[2024-06-27T14:55:18.120+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/weather_pipeline.py for tasks to queue
+[2024-06-27T14:55:18.125+0000] {logging_mixin.py:188} INFO - [2024-06-27T14:55:18.124+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/weather_pipeline.py
+[2024-06-27T14:55:21.231+0000] {logging_mixin.py:188} INFO - [2024-06-27T14:55:21.229+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/weather_pipeline.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/weather_pipeline.py", line 23, in <module>
+    'retry_delay': timedelta(secondes=40),
+                   ^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'secondes' is an invalid keyword argument for __new__()
+[2024-06-27T14:55:21.232+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/weather_pipeline.py
+[2024-06-27T14:55:21.274+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/weather_pipeline.py took 3.177 seconds
+[2024-06-27T14:55:51.599+0000] {processor.py:161} INFO - Started process (PID=350) to work on /opt/airflow/dags/weather_pipeline.py
+[2024-06-27T14:55:51.605+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/weather_pipeline.py for tasks to queue
+[2024-06-27T14:55:51.611+0000] {logging_mixin.py:188} INFO - [2024-06-27T14:55:51.610+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/weather_pipeline.py
+[2024-06-27T14:55:55.137+0000] {logging_mixin.py:188} INFO - [2024-06-27T14:55:55.134+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/weather_pipeline.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/weather_pipeline.py", line 23, in <module>
+    'retry_delay': timedelta(secondes=40),
+                   ^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'secondes' is an invalid keyword argument for __new__()
+[2024-06-27T14:55:55.139+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/weather_pipeline.py
+[2024-06-27T14:55:55.185+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/weather_pipeline.py took 3.617 seconds
+[2024-06-27T14:56:26.248+0000] {processor.py:161} INFO - Started process (PID=422) to work on /opt/airflow/dags/weather_pipeline.py
+[2024-06-27T14:56:26.261+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/weather_pipeline.py for tasks to queue
+[2024-06-27T14:56:26.279+0000] {logging_mixin.py:188} INFO - [2024-06-27T14:56:26.278+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/weather_pipeline.py
+[2024-06-27T14:56:36.638+0000] {logging_mixin.py:188} INFO - [2024-06-27T14:56:36.623+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/weather_pipeline.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/weather_pipeline.py", line 23, in <module>
+    'retry_delay': timedelta(secondes=40),
+                   ^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'secondes' is an invalid keyword argument for __new__()
+[2024-06-27T14:56:36.640+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/weather_pipeline.py
+[2024-06-27T14:56:36.744+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/weather_pipeline.py took 10.561 seconds
+[2024-06-27T14:57:07.289+0000] {processor.py:161} INFO - Started process (PID=505) to work on /opt/airflow/dags/weather_pipeline.py
+[2024-06-27T14:57:07.300+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/weather_pipeline.py for tasks to queue
+[2024-06-27T14:57:07.312+0000] {logging_mixin.py:188} INFO - [2024-06-27T14:57:07.311+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/weather_pipeline.py
+[2024-06-27T14:57:14.195+0000] {logging_mixin.py:188} INFO - [2024-06-27T14:57:14.185+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/weather_pipeline.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/weather_pipeline.py", line 23, in <module>
+    'retry_delay': timedelta(secondes=40),
+                   ^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'secondes' is an invalid keyword argument for __new__()
+[2024-06-27T14:57:14.197+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/weather_pipeline.py
+[2024-06-27T14:57:14.299+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/weather_pipeline.py took 7.088 seconds
+[2024-06-27T14:57:45.223+0000] {processor.py:161} INFO - Started process (PID=583) to work on /opt/airflow/dags/weather_pipeline.py
+[2024-06-27T14:57:45.253+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/weather_pipeline.py for tasks to queue
+[2024-06-27T14:57:45.260+0000] {logging_mixin.py:188} INFO - [2024-06-27T14:57:45.259+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/weather_pipeline.py
+[2024-06-27T14:57:56.698+0000] {logging_mixin.py:188} INFO - [2024-06-27T14:57:56.692+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/weather_pipeline.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/weather_pipeline.py", line 23, in <module>
+    'retry_delay': timedelta(secondes=40),
+                   ^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'secondes' is an invalid keyword argument for __new__()
+[2024-06-27T14:57:56.703+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/weather_pipeline.py
+[2024-06-27T14:57:56.782+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/weather_pipeline.py took 11.611 seconds
+[2024-06-27T14:58:27.373+0000] {processor.py:161} INFO - Started process (PID=666) to work on /opt/airflow/dags/weather_pipeline.py
+[2024-06-27T14:58:27.376+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/weather_pipeline.py for tasks to queue
+[2024-06-27T14:58:27.391+0000] {logging_mixin.py:188} INFO - [2024-06-27T14:58:27.390+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/weather_pipeline.py
+[2024-06-27T14:58:37.490+0000] {logging_mixin.py:188} INFO - [2024-06-27T14:58:37.475+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/weather_pipeline.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/weather_pipeline.py", line 23, in <module>
+    'retry_delay': timedelta(secondes=40),
+                   ^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'secondes' is an invalid keyword argument for __new__()
+[2024-06-27T14:58:37.503+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/weather_pipeline.py
+[2024-06-27T14:58:37.618+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/weather_pipeline.py took 10.280 seconds
+[2024-06-27T14:59:08.008+0000] {processor.py:161} INFO - Started process (PID=751) to work on /opt/airflow/dags/weather_pipeline.py
+[2024-06-27T14:59:08.029+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/weather_pipeline.py for tasks to queue
+[2024-06-27T14:59:08.036+0000] {logging_mixin.py:188} INFO - [2024-06-27T14:59:08.034+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/weather_pipeline.py
+[2024-06-27T14:59:14.402+0000] {logging_mixin.py:188} INFO - [2024-06-27T14:59:14.398+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/weather_pipeline.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/weather_pipeline.py", line 23, in <module>
+    'retry_delay': timedelta(secondes=40),
+                   ^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'secondes' is an invalid keyword argument for __new__()
+[2024-06-27T14:59:14.404+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/weather_pipeline.py
+[2024-06-27T14:59:14.454+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/weather_pipeline.py took 6.486 seconds
