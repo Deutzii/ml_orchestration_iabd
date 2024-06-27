@@ -1,18 +1,18 @@
 from airflow import DAG
-from airflow.operators.python_operator import PythonOperator
+from airflow.operators.python import PythonOperator
 from airflow.utils.dates import days_ago
-from datetime import datetime, timedelta
+from datetime import timedelta
 import os
 import sys
 import requests
 import pandas as pd
 
-# Add src directory to path
+# Ajoutez le chemin au système de chemins d'importation
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src'))
 
-from src.train import train_model
+from src.train import train_model  # Assurez-vous que le module train_model existe et est correctement importé
 
-# Default arguments for the DAG
+# Arguments par défaut pour le DAG
 default_args = {
     'owner': 'airflow',
     'depends_on_past': False,
@@ -21,14 +21,15 @@ default_args = {
     'email_on_retry': False,
     'retries': 1,
     'retry_delay': timedelta(minutes=5),
-    'schedule_interval': '@daily',
 }
 
-# Define the DAG
+# Définir le DAG
 dag = DAG(
     'weather_pipeline',
-    catchup=False,
     default_args=default_args,
+    description='A simple weather data pipeline',
+    schedule_interval='@daily',
+    catchup=False,
 )
 
 def fetch_weather_data():
@@ -40,7 +41,6 @@ def fetch_weather_data():
     hourly_data = data['hourly']
     temperature_data = hourly_data['temperature_2m']
     
-    # Assuming we store the data as a CSV for simplicity
     df = pd.DataFrame({
         'time': hourly_data['time'],
         'temperature_2m': temperature_data,
@@ -52,7 +52,7 @@ def fetch_weather_data():
 def train_model_task():
     train_model()
 
-# Tasks
+# Tâches
 download_task = PythonOperator(
     task_id='download_weather_data',
     python_callable=fetch_weather_data,
@@ -65,5 +65,5 @@ train_task = PythonOperator(
     dag=dag,
 )
 
-# Task dependencies
+# Dépendances des tâches
 download_task >> train_task

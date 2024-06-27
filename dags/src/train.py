@@ -5,13 +5,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 import joblib
 
-import datetime
-
-from airflow import DAG
-from airflow.operators.empty import EmptyOperator
-
-
-
 def compute_regression_metrics(y_true, y_pred):
     return {
         "mae": mean_absolute_error(y_true, y_pred),
@@ -23,14 +16,7 @@ def save_model(model, file_path):
     joblib.dump(model, file_path)
 
 def train_model():
-    
-    
-    with DAG(
-     dag_id="stream_meteo",
-     start_date=datetime.datetime(2024, 6, 26),
-     schedule="@daily",
- )as dag:
-     data = pd.read_csv("data/weather_data.csv").dropna()
+    data = pd.read_csv("data/weather_data.csv").dropna()
     target = ["temperature"]  # Change to your target variable
     features = ["humidity", "pressure", "wind_speed", "temperature"]  # Include new feature
 
@@ -43,4 +29,5 @@ def train_model():
     metrics = compute_regression_metrics(y_validation, y_pred)
     print(metrics)
     save_model(model, 'weather_model.pkl')
+
 
