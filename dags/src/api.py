@@ -35,7 +35,7 @@ def fetch_weather_data(latitude: float, longitude: float):
         f"Fetching weather data for latitude {latitude} and longitude {longitude}"
     )
     url = f"https://api.open-meteo.com/v1/meteofrance?latitude={latitude}&longitude={longitude}&hourly"\
-    "=temperature_2m&past_days=7"
+        "=temperature_2m&past_days=7"
     response = requests.get(url)
     if response.status_code != 200:
         print(f"Error fetching data: {response.status_code}")
