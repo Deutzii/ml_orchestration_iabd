@@ -10,7 +10,7 @@ import pandas as pd
 # Add the path to the system's import paths
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src'))
 
-from train import retrain_model  # Ensure that the train module exists and is correctly imported
+from src.train import retrain_model  # Ensure that the train module exists and is correctly imported
 
 # Default arguments for the DAG
 default_args = {
