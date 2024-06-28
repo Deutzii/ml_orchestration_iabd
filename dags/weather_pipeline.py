@@ -72,7 +72,7 @@ download_task = PythonOperator(
 train_task = PythonOperator(
     task_id='retrain_model',
     python_callable=retrain_model_task,
-    dag=dag ,
+    dag=dag,
 )
 
 # Task dependencies
