@@ -10,7 +10,7 @@ import pandas as pd
 # Add the path to the system's import paths
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src'))
 
-from src.train import retrain_model  # Ensure that the train module exists and is correctly imported
+from train import retrain_model  # Ensure that the train module exists and is correctly imported
 
 # Default arguments for the DAG
 default_args = {
@@ -37,9 +37,9 @@ def fetch_weather_data():
     print("Fetching weather data from Open Meteo API...")
     latitude = 52.52
     longitude = 13.41
-    url = f'https://api.open-meteo.com/v1/meteofrance?latitude={latitude}&longitude={longitude}&hourly'\
-    '=temperature_2m,relative_humidity_2m,dew_point_2m,apparent_temperature,precipitation,rain,snowfall,'\
-    'weather_code,surface_pressure,wind_speed_10m&past_days=7'
+    url = f'https://api.open-meteo.com/v1/meteofrance?latitude={latitude}&longitude={longitude}&hourly=' \
+        'temperature_2m,relative_humidity_2m,dew_point_2m,apparent_temperature,precipitation,' \
+        'rain,snowfall,weather_code,surface_pressure,wind_speed_10m&past_days=7'
     response = requests.get(url)
     if response.status_code != 200:
         print(f"Error fetching data: {response.status_code}")

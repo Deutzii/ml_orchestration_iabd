@@ -41,8 +41,7 @@ def train_model():
     X = data[features]
     y = data[target]
     X_train, X_validation, y_train, y_validation = train_test_split(
-        X, y, test_size=0.3, random_state=42
-    )
+        X, y, test_size=0.3, random_state=42)
 
     model = LinearRegression()
     model.fit(X_train, y_train)

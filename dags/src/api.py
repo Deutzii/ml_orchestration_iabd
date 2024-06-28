@@ -38,10 +38,8 @@ def fetch_weather_data(latitude: float, longitude: float):
     response = requests.get(url)
     if response.status_code != 200:
         print(f"Error fetching data: {response.status_code}")
-        raise HTTPException(
-            status_code=response.status_code,
-            detail="Error fetching data from Open Meteo API"
-        )
+        raise HTTPException(status_code=response.status_code,
+                            detail="Error fetching data from Open Meteo API")
     data = response.json()
     temperature = data['hourly']['temperature_2m'][
         -1]  # Use the latest data point
@@ -76,10 +74,8 @@ def fetch_and_save_weather_data():
 
 
 @app.get("/predict/")
-async def predict(
-    humidity: float, pressure: float, wind_speed: float, latitude: float,
-    longitude: float
-):
+async def predict(humidity: float, pressure: float, wind_speed: float,
+                  latitude: float, longitude: float):
     print(
         f"Received request with params - Humidity: {humidity}, Pressure: {pressure}, Wind Speed: {wind_speed}, Latitude: {latitude}, Longitude: {longitude}"
     )
@@ -107,8 +103,7 @@ async def predict(
 
     # Load model and make prediction
     model = load_model(
-        os.path.join(os.path.dirname(__file__), 'weather_model.pkl')
-    )
+        os.path.join(os.path.dirname(__file__), 'weather_model.pkl'))
     prediction = model.predict(input_df)
     prediction = {"prediction": prediction[0][0]}
     print("Prediction made:", prediction)
