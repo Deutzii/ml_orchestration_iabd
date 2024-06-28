@@ -13,7 +13,7 @@ The Model Trainer Job depends on the Data Collector Job.
 ## How to use
 To activate Airflow using Docker, follow these steps:
 
-1. Initialize Airflow: 
+1. Initialize Airflow:
 
     ```docker compose up airflow-init```
 
@@ -26,4 +26,3 @@ To activate Airflow using Docker, follow these steps:
 To clean up Docker resources, execute:
 
 ```docker compose down --volumes --remove-orphans```
-

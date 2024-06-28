@@ -56,7 +56,7 @@ def fetch_and_save_weather_data():
     print("Fetched data successfully, preparing DataFrame...")
 
     df = pd.DataFrame(hourly_data)
-    
+
     current_date = datetime.now().strftime("%Y%m%d")
     output_dir = './data'
     os.makedirs(output_dir, exist_ok=True)
@@ -68,18 +68,18 @@ def fetch_and_save_weather_data():
 @app.get("/predict/")
 async def predict(humidity: float, pressure: float, wind_speed: float, latitude: float, longitude: float):
     print(f"Received request with params - Humidity: {humidity}, Pressure: {pressure}, Wind Speed: {wind_speed}, Latitude: {latitude}, Longitude: {longitude}")
-    
+
     # Check cache first
     cache_key = f"{humidity}-{pressure}-{wind_speed}-{latitude}-{longitude}"
     if r.exists(cache_key):
         print("Cache hit, returning cached prediction")
         prediction = r.get(cache_key)
         return json.loads(prediction)
-    
+
     print("Cache miss, fetching additional weather data and making prediction")
     # Fetch additional weather data
     temperature = fetch_weather_data(latitude, longitude)
-    
+
     # Prepare input for model
     input_dict = {
         "humidity": humidity,
@@ -89,13 +89,13 @@ async def predict(humidity: float, pressure: float, wind_speed: float, latitude:
     }
     input_df = pd.DataFrame([input_dict])
     print("Input data prepared for prediction:", input_dict)
-    
+
     # Load model and make prediction
     model = load_model(os.path.join(os.path.dirname(__file__), 'weather_model.pkl'))
     prediction = model.predict(input_df)
     prediction = {"prediction": prediction[0][0]}
     print("Prediction made:", prediction)
-    
+
     # Cache the prediction
     r.set(cache_key, json.dumps(prediction))
     print("Prediction cached")

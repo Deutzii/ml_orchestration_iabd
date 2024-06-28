@@ -49,7 +49,7 @@ def fetch_weather_data():
     print("Fetched data successfully, preparing DataFrame...")
 
     df = pd.DataFrame(hourly_data)
-    
+
     current_date = datetime.now().strftime("%Y%m%d")
     output_dir = './data'
     os.makedirs(output_dir, exist_ok=True)
