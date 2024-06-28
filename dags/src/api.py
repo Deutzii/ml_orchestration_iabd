@@ -52,8 +52,8 @@ def fetch_and_save_weather_data():
     latitude = 52.52
     longitude = 13.41
     url = f'https://api.open-meteo.com/v1/meteofrance?latitude={latitude}&longitude={longitude}&hourly'\
-    '=temperature_2m,relative_humidity_2m,dew_point_2m,apparent_temperature,precipitation,rain,snowfall,'\
-    'weather_code,surface_pressure,wind_speed_10m&past_days=7'
+        '=temperature_2m,relative_humidity_2m,dew_point_2m,apparent_temperature,precipitation,rain,snowfall,'\
+        'weather_code,surface_pressure,wind_speed_10m&past_days=7'
     response = requests.get(url)
     if response.status_code != 200:
         print(f"Error fetching data: {response.status_code}")
