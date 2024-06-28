@@ -7,6 +7,7 @@ import redis
 import requests
 import json
 import os
+import streamlit as st
 
 app = FastAPI()
 
@@ -39,30 +40,32 @@ def fetch_weather_data(latitude: float, longitude: float):
     print(f"Latest temperature data fetched: {temperature}°C")
     return temperature
 
+# Function to fetch and save weather data
 def fetch_and_save_weather_data():
-    print("Fetching weather data from Open Meteo API...")
-    latitude = 52.52
-    longitude = 13.41
-    url = f'https://api.open-meteo.com/v1/meteofrance?latitude={latitude}&longitude={longitude}&hourly'\
-    '=temperature_2m,relative_humidity_2m,dew_point_2m,apparent_temperature,precipitation,rain,snowfall,'\
-    'weather_code,surface_pressure,wind_speed_10m&past_days=7'
-    response = requests.get(url)
-    if response.status_code != 200:
-        print(f"Error fetching data: {response.status_code}")
-        raise Exception("Error fetching data from Open Meteo API")
-    data = response.json()
-    hourly_data = data['hourly']
+    try:
+        st.write("Fetching weather data from Open Meteo API...")
+        latitude = 52.52
+        longitude = 13.41
+        url = f'https://api.open-meteo.com/v1/meteofrance?latitude={latitude}&longitude={longitude}&hourly='\
+              'temperature_2m,relative_humidity_2m,dew_point_2m,apparent_temperature,precipitation,rain,snowfall,'\
+              'weather_code,surface_pressure,wind_speed_10m&past_days=7'
+        response = requests.get(url)
+        response.raise_for_status()
+        data = response.json()
+        hourly_data = data['hourly']
 
-    print("Fetched data successfully, preparing DataFrame...")
+        st.write("Fetched data successfully, preparing DataFrame...")
 
-    df = pd.DataFrame(hourly_data)
-    
-    current_date = datetime.now().strftime("%Y%m%d")
-    output_dir = './data'
-    os.makedirs(output_dir, exist_ok=True)
-    output_file = os.path.join(output_dir, f'weather_data-{current_date}.csv')
-    df.to_csv(output_file, index=False)
-    print(f"Data saved to {output_file}")
+        df = pd.DataFrame(hourly_data)
+        
+        current_date = datetime.now().strftime("%Y%m%d")
+        output_dir = './data'
+        os.makedirs(output_dir, exist_ok=True)
+        output_file = os.path.join(output_dir, f'weather_data-{current_date}.csv')
+        df.to_csv(output_file, index=False)
+        st.write(f"Data saved to {output_file}")
+    except Exception as e:
+        st.error(f"An error occurred: {e}")
 
 
 @app.get("/predict/")
@@ -116,5 +119,11 @@ def test_predict():
 
 if __name__ == "__main__":
     test_fetch_weather_data()
-    fetch_and_save_weather_data()
+    #fetch_and_save_weather_data()
     #test_predict()
+    # Streamlit app
+    st.title("Weather Data Fetcher")
+    st.write("Click the button below to fetch and save weather data.")
+    if st.button("Fetch Weather Data"):
+        fetch_and_save_weather_data()
+        

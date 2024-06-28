@@ -284,6 +284,20 @@ services:
         condition: service_completed_successfully
     networks:
       - airflow-network
+  
+  streamlit:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8501:8501"
+    volumes:
+      - .:/app
+    networks:
+      - airflow-network
+    depends_on:
+      - redis
+      - postgres
 
 volumes:
   postgres-db-volume:

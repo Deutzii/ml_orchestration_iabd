@@ -16,6 +16,12 @@ RUN pip install --no-cache-dir -r /opt/app/requirements.txt
 # Expose port 8000 for the FastAPI application
 EXPOSE 8000
 
+# Expose the port Streamlit uses
+EXPOSE 8501
+
+
 # Define environment variable
 ENV MODEL_PATH=/opt/app/weather_model.pkl
 
+# Run Streamlit
+CMD ["streamlit", "run", "dags/src/app_streamlit.py"]
