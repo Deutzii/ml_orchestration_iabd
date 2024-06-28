@@ -116,5 +116,5 @@ def test_predict():
 
 if __name__ == "__main__":
     test_fetch_weather_data()
-    #fetch_and_save_weather_data()
+    fetch_and_save_weather_data()
     #test_predict()

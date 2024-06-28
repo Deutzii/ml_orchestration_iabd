@@ -10,7 +10,7 @@ import pandas as pd
 # Add the path to the system's import paths
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src'))
 
-from train import retrain_model  # Ensure that the train module exists and is correctly imported
+from src.train import retrain_model  # Ensure that the train module exists and is correctly imported
 
 # Default arguments for the DAG
 default_args = {
@@ -63,17 +63,17 @@ def retrain_model_task():
     print("Model retraining completed.")
 
 # Tasks
-download_task = PythonOperator(
-    task_id='download_weather_data',
+fetch_weather_task = PythonOperator(
+    task_id='fetch_weather_data',
     python_callable=fetch_weather_data,
     dag=dag,
 )
 
-train_task = PythonOperator(
+retrain_model_task  = PythonOperator(
     task_id='retrain_model',
     python_callable=retrain_model_task,
     dag=dag,
 )
 
 # Task dependencies
-download_task >> train_task
+fetch_weather_task  >> retrain_model_task
