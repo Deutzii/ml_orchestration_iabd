@@ -32,6 +32,7 @@ dag = DAG(
     catchup=False,
 )
 
+
 def fetch_weather_data():
     print("Fetching weather data from Open Meteo API...")
     latitude = 52.52
@@ -57,10 +58,12 @@ def fetch_weather_data():
     df.to_csv(output_file, index=False)
     print(f"Data saved to {output_file}")
 
+
 def retrain_model_task():
     print("Retraining model with new data...")
     retrain_model()
     print("Model retraining completed.")
+
 
 # Tasks
 download_task = PythonOperator(

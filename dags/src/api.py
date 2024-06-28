@@ -13,6 +13,7 @@ app = FastAPI()
 # Redis setup
 r = redis.Redis(host='redis', port=6379, db=0)
 
+
 # Load model function
 def load_model(file_path):
     print(f"Loading model from {file_path}")
@@ -20,24 +21,33 @@ def load_model(file_path):
     print("Model loaded successfully")
     return model
 
+
 # Define input data model
 class InputData(BaseModel):
     humidity: float
     pressure: float
     wind_speed: float
 
+
 # Fetch data from Open Meteo API
 def fetch_weather_data(latitude: float, longitude: float):
-    print(f"Fetching weather data for latitude {latitude} and longitude {longitude}")
+    print(
+        f"Fetching weather data for latitude {latitude} and longitude {longitude}"
+    )
     url = f"https://api.open-meteo.com/v1/meteofrance?latitude={latitude}&longitude={longitude}&hourly=temperature_2m&past_days=7"
     response = requests.get(url)
     if response.status_code != 200:
         print(f"Error fetching data: {response.status_code}")
-        raise HTTPException(status_code=response.status_code, detail="Error fetching data from Open Meteo API")
+        raise HTTPException(
+            status_code=response.status_code,
+            detail="Error fetching data from Open Meteo API"
+        )
     data = response.json()
-    temperature = data['hourly']['temperature_2m'][-1]  # Use the latest data point
+    temperature = data['hourly']['temperature_2m'][
+        -1]  # Use the latest data point
     print(f"Latest temperature data fetched: {temperature}°C")
     return temperature
+
 
 def fetch_and_save_weather_data():
     print("Fetching weather data from Open Meteo API...")
@@ -66,8 +76,13 @@ def fetch_and_save_weather_data():
 
 
 @app.get("/predict/")
-async def predict(humidity: float, pressure: float, wind_speed: float, latitude: float, longitude: float):
-    print(f"Received request with params - Humidity: {humidity}, Pressure: {pressure}, Wind Speed: {wind_speed}, Latitude: {latitude}, Longitude: {longitude}")
+async def predict(
+    humidity: float, pressure: float, wind_speed: float, latitude: float,
+    longitude: float
+):
+    print(
+        f"Received request with params - Humidity: {humidity}, Pressure: {pressure}, Wind Speed: {wind_speed}, Latitude: {latitude}, Longitude: {longitude}"
+    )
 
     # Check cache first
     cache_key = f"{humidity}-{pressure}-{wind_speed}-{latitude}-{longitude}"
@@ -91,7 +106,9 @@ async def predict(humidity: float, pressure: float, wind_speed: float, latitude:
     print("Input data prepared for prediction:", input_dict)
 
     # Load model and make prediction
-    model = load_model(os.path.join(os.path.dirname(__file__), 'weather_model.pkl'))
+    model = load_model(
+        os.path.join(os.path.dirname(__file__), 'weather_model.pkl')
+    )
     prediction = model.predict(input_df)
     prediction = {"prediction": prediction[0][0]}
     print("Prediction made:", prediction)
@@ -101,6 +118,7 @@ async def predict(humidity: float, pressure: float, wind_speed: float, latitude:
     print("Prediction cached")
     return prediction
 
+
 # Test functions
 def test_fetch_weather_data():
     print("---------------------------------------")
@@ -108,11 +126,13 @@ def test_fetch_weather_data():
     temperature = fetch_weather_data(52.52, 13.41)
     print(f"Fetched temperature: {temperature}°C")
 
+
 def test_predict():
     print("---------------------------------------")
     print("Testing predict function...")
     result = predict(65.0, 1013.0, 5.0, 52.52, 13.41)
     print("Prediction result:", result)
+
 
 if __name__ == "__main__":
     test_fetch_weather_data()

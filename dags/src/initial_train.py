@@ -9,11 +9,17 @@ file_path = 'data/weather_data-20240627.csv'
 df = pd.read_csv(file_path)
 
 # Select relevant features
-features = df[['relative_humidity_2m', 'dew_point_2m', 'apparent_temperature', 'precipitation', 'rain', 'snowfall', 'weather_code', 'surface_pressure', 'wind_speed_10m']]
+features = df[[
+    'relative_humidity_2m', 'dew_point_2m', 'apparent_temperature',
+    'precipitation', 'rain', 'snowfall', 'weather_code', 'surface_pressure',
+    'wind_speed_10m'
+]]
 target = df['temperature_2m']
 
 # Split the data into training and test sets
-X_train, X_test, y_train, y_test = train_test_split(features, target, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(
+    features, target, test_size=0.2, random_state=42
+)
 
 # Initialize and train the model
 model = LinearRegression()
