@@ -1,0 +1,39 @@
+name: Format Python code
+
+on: 
+  pull_request:
+    paths:
+      - '**.py'
+  push:
+    branches:
+      - main
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Install black
+        run: pip install black
+
+      - name: Run black
+        run: black . --check
+
+      - name: Commit changes
+        if: success() || failure()
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git fetch
+          git checkout ${{ github.head_ref }}
+          black . --diff
+          git add .
+          git commit -m 'Automatically formatted code with black' || echo "No changes to commit"
+          git push origin ${{ github.head_ref }}
